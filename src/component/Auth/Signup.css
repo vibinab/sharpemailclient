@@ -1,0 +1,32 @@
+.signupmainform  {
+    border: 2px solid rgb(196, 161, 161);
+    height: 100vh;
+    width: 100%;
+}
+
+.signupmainform .signform {
+    border: 2px solid brown;
+    padding: 4rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.signformcontent {
+   margin: 0 auto;
+    width: 12rem;
+}
+
+.signform form {
+    padding: 3rem;
+    border: 2px solid red;
+    padding-left: 1rem;
+}
+
+.signform form div {
+    margin-top: 2rem;
+} 
+
+.signformcontent input {
+    height: 1.5rem;
+}
