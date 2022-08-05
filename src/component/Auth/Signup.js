@@ -8,7 +8,7 @@ export const Signup = () => {
     const [email,setemail]=useState('');
     const [password,setpassword]= useState('');
     const [confirmpassowrd, setconfirmpassword]=useState('');
-    const [submiterror, setsubmiterror]=useState(false)
+   
 
     const emailhandler=(event)=> {
         console.log(event)
@@ -31,6 +31,7 @@ export const Signup = () => {
         const useremail=email
         const userpassword=password
         const  userconfirmpassword=confirmpassowrd
+        
 
         if(userpassword===userconfirmpassword){
 
@@ -76,7 +77,7 @@ export const Signup = () => {
         setconfirmpassword("")
     }
     else {
-         setsubmiterror(true)
+        alert("password dont match")
     }
         
     }
@@ -84,25 +85,26 @@ export const Signup = () => {
     <>
         <div className='signupmainform'>
         <div className='signform'>
+            <h1 style={{textAlign:"center"}}>Signupform</h1>
             <form className='signformcontent' onSubmit={submithandler}>
                 <div>
              
-                <input type="email" placeholder='email' onChange={emailhandler}></input>
+                <input type="email" placeholder='email' onChange={emailhandler} ></input>
                 </div>
                 <div>
                     
-                    <input type="password" placeholder='password' onChange={passwordhandler}></input>
+                    <input type="password" placeholder='password' onChange={passwordhandler} required></input>
                 </div>
                 <div>
                    
-                    <input type="password" placeholder='confirm password' onChange={confirmpasswordhandler}></input>
+                    <input type="password" placeholder='confirm' onChange={confirmpasswordhandler} required></input>
                 </div>
                 <div>
-                    <button type="submit">Signup</button>
+                    <button type="submit">Signbutton</button>
                 </div>
                 <div>
 
-                    {submiterror && <p>password don;t match</p>}
+                  
                 </div>
                
             </form>
