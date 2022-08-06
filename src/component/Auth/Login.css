@@ -1,0 +1,20 @@
+.loginformmain {
+    border: 2px solid black;
+    margin-top: 15rem;
+    padding: 2rem;
+    /* position: relative; */
+    height:15rem;
+}
+
+.subformlogin {
+    border: 2px solid red;
+    width: 15rem;
+    position: absolute;
+    left: 40%;
+    padding: 2rem;
+}
+
+.subformlogin form  div {
+    margin-top: 1rem;
+
+} 
