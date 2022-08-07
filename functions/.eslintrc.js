@@ -1,0 +1,16 @@
+module.exports = {
+  root: true,
+  env: {
+    es6: true,
+    node: true,
+  },
+  extends: [
+    "eslint:recommended",
+    "google",
+  ],
+  rules: {
+    "linebreak-style": 0,
+    "eol-last": 0,
+    "quotes": ["error", "double"],
+  },
+};

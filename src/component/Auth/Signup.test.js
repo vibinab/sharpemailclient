@@ -8,7 +8,7 @@ test('renders heading', () => {
 });
 
 
-test('render form password input field using placeholder ', ()=> {
+test('render form password input field using placeholder', ()=> {
 render(<Signup />) 
 
 const inputelement=screen.getByPlaceholderText(/password/i);
