@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import "./View.css";
 import axios from "axios";
 
@@ -9,12 +9,14 @@ export const View = () => {
     const [getdata, setgetdata]=useState([])
 
     useEffect(()=>{
-        axios.get('https://emailclient-b79a4-default-rtdb.firebaseio.com/emailclient.json')
+       
+        axios.get('https://emailclient-b79a4-default-rtdb.firebaseio.com/client.json')
         .then((res)=>{
             let data=[]
             
             for(const key in res.data){
-                console.log(res.data[key].body)
+                console.log(res.data[key].body) 
+                res.data[key].body.key=key
                 const parent=res.data[key].body
                 data.push(parent)
                
@@ -29,9 +31,27 @@ export const View = () => {
 
     },[])
 
+
+    const deletehandler= useCallback((key)=>{
+        console.log(key)
+        axios.delete(`https://emailclient-b79a4-default-rtdb.firebaseio.com/client/${key}.json`)
+        .then((res)=>console.log(res))
+        .catch((error)=>console.log(error))
+
+    },[])
+
+
+    useEffect( ()=> {
+        deletehandler()
+    }, [deletehandler])
+
   return (
     <>
     <div>
+        <h1>view emails</h1>
+    </div>
+    <div>
+
         {
             getdata.map((email)=> {
                 return (
@@ -40,7 +60,9 @@ export const View = () => {
                      
                        <li>{email.email}</li>
                        <li>{email.subject}</li>
-                       <li>{email.body}</li>
+                       <li>{email.body}</li> 
+                       <li><button onClick={()=>deletehandler(email.key)}>delete</button></li>
+                       
                        
                        </ul>
                         

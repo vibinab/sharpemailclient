@@ -36,7 +36,7 @@ export const Mail = (props) => {
 
     console.log(data)
 
-    axios.post('https://emailclient-b79a4-default-rtdb.firebaseio.com/emailclient.json',{
+    axios.post('https://emailclient-b79a4-default-rtdb.firebaseio.com/client.json',{
       body:data
     })
     .then((res)=> {
