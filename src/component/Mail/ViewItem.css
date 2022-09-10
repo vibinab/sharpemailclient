@@ -1,0 +1,44 @@
+.viewitem  li span {
+    margin-left: 2rem;
+   
+}
+
+.viewitem  li::before {
+    content: "\2022";
+    color: blue;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+  }
+
+  .viewitem .btn {
+    background: none;
+    border: none;
+  }
+
+  .already li {
+    list-style-type: none;
+    margin-left: 4rem;
+  }
+
+  .already li span{
+   
+    margin-left: 2rem;
+  }
+
+  .already .btn {
+    background: none;
+    border: none;
+  }
+  
+
+
+  .already li::before {
+    content: "";
+    color: red;
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+  }

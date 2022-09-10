@@ -3,14 +3,17 @@ import React, { useContext, useState } from 'react'
 import "./Login.css";
 import AuthContext from '../../store/auth-context';
 import { useHistory } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-export const Login = () => {
+export const Login = (props) => {
 
   const history=useHistory()
 
   const[email, setemail]= useState('');
   const [password, setpassword]=useState('');
   const authctx=useContext(AuthContext)
+  const[iserror, setiserror]=useState(false)
+  const[errormesg,seterrormsg]=useState("")
 
   const emailhandler=(event)=> {
     setemail(event.target.value)
@@ -25,6 +28,7 @@ export const Login = () => {
      event.preventDefault();
      const useremail=email
      const userpassword=password
+     props.onmainuserhandler(useremail)
 
      const data={
           email:useremail,
@@ -32,7 +36,7 @@ export const Login = () => {
      }
      console.log(data)
 
-      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKqZs1cWTZWAWakWzJUYO1AeAdhKpQe6k', {
+      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBii3N5oNv2Wy74_8AU8s16ZB4JJ2kYj7w', {
           method:'POST',
           body:JSON.stringify({
             email:useremail,
@@ -49,15 +53,19 @@ export const Login = () => {
          res.json().then((res)=> {
           console.log(res)
           authctx.login(data.idToken)
+          
           history.replace('mail')
          })
         }
         else {
+          setiserror(true)
           res.json().then((data)=> {
             let err;
             if(data && data.error.message && data.error){
                err= data.error.message
             }
+            console.log("login err",err)
+            seterrormsg(err)
 
             throw new Error(err)
 
@@ -66,7 +74,11 @@ export const Login = () => {
       
       }
       )
-      .catch((error)=>console.log(error.message))
+      .catch((error)=>{
+        
+        console.log(error.message)
+        seterrormsg(error.message)
+      })
 
 
 
@@ -81,7 +93,7 @@ export const Login = () => {
            <form onSubmit={submithandler}>
            <div>
             <label>email:
-            <input type="email" onChange={emailhandler} name="email"></input>
+            <input type="email" onChange={emailhandler} name="email" required></input>
             
             </label>
             
@@ -89,7 +101,7 @@ export const Login = () => {
             </div>
             <div>
             <label>password:
-            <input type="password" onChange={passwordhandler} name="pass"></input>
+            <input type="password" onChange={passwordhandler} name="pass" required></input>
             
             </label>
           
@@ -99,10 +111,21 @@ export const Login = () => {
             <div>
               <button type="submit">loginbtn</button>
             </div>
+            
            </form>
 
         </div>
+        <div>
+      <p>{ iserror && <span>{errormesg}</span>}</p>
+
       </div>
+      </div>
+     
+      <div style={{textAlign:"center"}}>
+      <h6>if user exist, signup</h6>
+<NavLink to="/">signup</NavLink>
+      </div>
+     
     </>
   )
 }
